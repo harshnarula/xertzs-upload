@@ -92,6 +92,18 @@ body {
     color: #333;
     transition: border-color 0.3s ease;
   }
+
+  #phone-number {
+    width: 100%; /* Full width for mobile */
+    max-width: 400px; /* Set max width for desktop */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s ease;
+  }
   
   #uploadForm {
     display: flex;
@@ -106,6 +118,17 @@ body {
   }
   
   #file-name:focus {
+    border-color: #42a5f5;
+    outline: none;
+    box-shadow: 0 0 5px rgba(66, 165, 245, 0.5);
+  }
+
+  .content-div-footer{
+    font-size: 12px;
+    color: #555;
+  }
+
+  #phone-number:focus {
     border-color: #42a5f5;
     outline: none;
     box-shadow: 0 0 5px rgba(66, 165, 245, 0.5);
@@ -142,7 +165,7 @@ body {
   .custom-upload-button:hover {
     background-color: #2196f3;
   }
-  
+
   /* Responsive styles */
   @media (max-width: 768px) {
     .content-div-header {
@@ -163,6 +186,10 @@ body {
     }
   
     #file-name {
+      width: 100%; /* Full width for mobile */
+    }
+
+    #phone-number {
       width: 100%; /* Full width for mobile */
     }
   }

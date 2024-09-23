@@ -23,8 +23,12 @@
         <div class="text-content">
           <h1 class="content-div-header">Prayer House of Deliverance Church</h1>
           <p class="content-div-desc">
-            Share your uplifting photos of faith and fellowship, celebrating
-            God's miracles together as we grow in love and community.
+            This church is more than a building; it is a sanctuary of refuge,
+            hope, and healing for 25 years. Imagine the lives still to be
+            touched by the grace you help carry forward. Think of the prayers,
+            faith, and burdens lifted here. Your offering is more than a gift—it
+            is a part of this church’s story of love, faith, and community. What
+            we give today echoes in eternity.
           </p>
 
           <!-- Custom Upload Button -->
@@ -35,6 +39,16 @@
               placeholder="Enter your name"
               required
             />
+            <input
+              id="phone-number"
+              type="text"
+              placeholder="Enter your phone number"
+              required
+            />
+            <p class = "content-div-footer">
+              Please Upload your Contact Details/Business card/Visiting card
+              here.
+            </p>
             <div class="buttons-div">
               <label for="file-upload" class="custom-upload-button"
                 >Upload</label
@@ -88,8 +102,9 @@
 
           const fileInput = document.getElementById("file-upload");
           const fileNameInput = document.getElementById("file-name");
+          const phoneNumberInput = document.getElementById("phone-number");
           const file = fileInput.files[0];
-          const fileName = fileNameInput.value;
+          const fileName = fileNameInput.value + " " + phoneNumberInput.value;
 
           const errorMessage = document.getElementById("error-message");
           const successMessage = document.getElementById("success-message");
