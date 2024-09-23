@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prayer House of Deliverance</title>
+    <link rel="stylesheet" href="index.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="box">
+      <div class="content-div">
+        <div class="image-container">
+          <img
+            src="Screenshot 2024-09-22 120708.png"
+            alt="Image"
+            class="content-img"
+          />
+        </div>
+        <div class="text-content">
+          <h1 class="content-div-header">Prayer House of Deliverance Church</h1>
+          <p class="content-div-desc">
+            Share your uplifting photos of faith and fellowship, celebrating
+            God's miracles together as we grow in love and community.
+          </p>
+
+          <!-- Custom Upload Button -->
+          <form id="uploadForm" enctype="multipart/form-data" method="post">
+            <input
+              id="file-name"
+              type="text"
+              placeholder="Enter your name"
+              required
+            />
+            <div class="buttons-div">
+              <label for="file-upload" class="custom-upload-button"
+                >Upload</label
+              >
+              <input
+                id="file-upload"
+                class="upload-button-hidden"
+                type="file"
+                name="file"
+                accept=".jpg,.jpeg,.png,.gif,.pdf"
+                required
+              />
+              <button type="submit" class="custom-upload-button">Submit</button>
+            </div>
+          </form>
+
+          <p id="error-message" style="color: red; display: none"></p>
+          <p id="success-message" style="color: green; display: none"></p>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      // Import Firebase libraries
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+      import {
+        getStorage,
+        ref,
+        uploadBytes,
+      } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-storage.js";
+
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyC8uZ9IrfQ5b-W1tmYdhDqGb_YLQvS_z8Y",
+        authDomain: "prayer-house-7274d.firebaseapp.com",
+        projectId: "prayer-house-7274d",
+        storageBucket: "prayer-house-7274d.appspot.com",
+        messagingSenderId: "104569293783",
+        appId: "1:104569293783:web:5e0ce0950f9813c1661992",
+        measurementId: "G-7L5J95QJNE",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const storage = getStorage(app); // Initialize Firebase Storage
+
+      document
+        .getElementById("uploadForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent the form from submitting the default way
+
+          const fileInput = document.getElementById("file-upload");
+          const fileNameInput = document.getElementById("file-name");
+          const file = fileInput.files[0];
+          const fileName = fileNameInput.value;
+
+          const errorMessage = document.getElementById("error-message");
+          const successMessage = document.getElementById("success-message");
+
+          if (!fileName) {
+            errorMessage.textContent = "File name is required!";
+            errorMessage.style.display = "block"; // Show error message
+            successMessage.style.display = "none"; // Hide success message
+
+            // Hide the error message after 1.5 seconds
+            setTimeout(() => {
+              errorMessage.style.display = "none";
+            }, 1500);
+            return;
+          }
+
+          if (file) {
+            const storageRef = ref(storage, `uploads/${fileName}`); // Reference to the file location with the specified file name
+            uploadBytes(storageRef, file)
+              .then(() => {
+                successMessage.textContent = "File Uploaded Successfully";
+                successMessage.style.display = "block"; // Show success message
+                errorMessage.textContent = ""; // Clear error message
+                errorMessage.style.display = "none"; // Hide error message
+              })
+              .catch((error) => {
+                errorMessage.textContent = "Upload error: " + error.message;
+                errorMessage.style.display = "block"; // Show error message
+                successMessage.textContent = ""; // Clear success message
+                successMessage.style.display = "none"; // Hide success message
+              });
+          } else {
+            errorMessage.textContent = "No file selected!";
+            errorMessage.style.display = "block"; // Show error message
+            successMessage.textContent = ""; // Clear success message
+            successMessage.style.display = "none"; // Hide success message
+
+            // Hide the error message after 1.5 seconds
+            setTimeout(() => {
+              errorMessage.style.display = "none";
+            }, 1500);
+          }
+        });
+    </script>
+  </body>
+</html>
