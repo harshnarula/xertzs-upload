@@ -45,7 +45,7 @@
               placeholder="Enter your phone number"
               required
             />
-            <p class = "content-div-footer">
+            <p class="content-div-footer">
               Please Upload your Contact Details/Business card/Visiting card
               here.
             </p>
@@ -109,8 +109,13 @@
           const errorMessage = document.getElementById("error-message");
           const successMessage = document.getElementById("success-message");
 
-          if (!fileName) {
-            errorMessage.textContent = "File name is required!";
+          // Validate phone number
+          const phoneNumber = phoneNumberInput.value;
+          const phoneNumberRegex = /^\d{10,}$/; // Regular expression to check for at least 10 digits
+
+          if (!phoneNumberRegex.test(phoneNumber)) {
+            errorMessage.textContent =
+              "Phone number must be at least 10 digits long and contain only numbers!";
             errorMessage.style.display = "block"; // Show error message
             successMessage.style.display = "none"; // Hide success message
 
